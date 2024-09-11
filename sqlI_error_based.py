@@ -3,7 +3,8 @@ import string
 
 # Request Params:
 
-url = "https://0add00ef041ef6ce8035a98600c00047.web-security-academy.net/filter"
+host = "0add00ef041ef6ce8035a98600c00047.web-security-academy.net"
+url = F"https://{host}/filter"
 trackingId ="FV1TanKwqLFHEpDX"
 
 cookies = {
@@ -12,12 +13,12 @@ cookies = {
 }
 
 headers = {
-    'Host': '0add00ef041ef6ce8035a98600c00047.web-security-academy.net',
+    'Host': F'{host}',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0',
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     # 'Accept-Encoding': 'gzip, deflate, br',
-    'Referer': 'https://0add00ef041ef6ce8035a98600c00047.web-security-academy.net/filter?category=Pets',
+    'Referer': F'{host}/filter?category=Pets',
     'Upgrade-Insecure-Requests': '1',
     'Sec-Fetch-Dest': 'document',
     'Sec-Fetch-Mode': 'navigate',
